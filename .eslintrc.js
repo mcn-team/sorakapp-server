@@ -24,7 +24,7 @@ module.exports = {
         'array-bracket-spacing': ['error', 'always'],
         'object-curly-spacing': ['error', 'always'],
         'multiline-ternary': ['warn', 'always-multiline'],
-        'no-return-await': ['error', 'always'],
+        'no-return-await': [2],
         'arrow-body-style': ['error', 'always'],
         'no-magic-numbers': ['error', {
             ignore: [-1, 0, 1],
