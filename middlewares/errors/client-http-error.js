@@ -1,0 +1,21 @@
+const { HTTP_INTERNAL_SERVER_ERROR } = require('../../src/constants/http.constants');
+
+/**
+ * This error middleware compiles an error object to send to client
+ *
+ * @param {Error} err - Error object
+ * @param {object<request>} req - ExpressJS request
+ * @param {object<response>} res - ExpressJS response
+ * @param {function} next - ExpressJS callback for next middleware
+ */
+// eslint-disable-next-line no-unused-vars
+exports.clientHTTPError = function clientHTTPError(err, req, res, next) {
+    const statusCode = err.statusCode || HTTP_INTERNAL_SERVER_ERROR;
+    const payload = {
+        message: err.message,
+        statusCode,
+        ...(err.errno && { errno: err.errno })
+    };
+
+    res.status(statusCode).send(payload);
+};

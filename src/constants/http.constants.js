@@ -1,0 +1,10 @@
+/**
+ * CLIENT ERRORS
+ */
+exports.HTTP_UNPROCESSABLE_ENTITY = 422;
+
+/**
+ * SERVER ERRORS
+ */
+exports.HTTP_INTERNAL_SERVER_ERROR = 500;
+
