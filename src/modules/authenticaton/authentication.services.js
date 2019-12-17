@@ -4,7 +4,7 @@ const User = mongoose.model('User');
 async function authenticate(logs) {
     try {
         //get user to authenticate with its username
-        const user = await User.findOne({username: logs.username});
+        const user = await User.findOne({ username: logs.username });
 
         //check is user exists
         if (user !== null) {
@@ -18,6 +18,7 @@ async function authenticate(logs) {
             return null; //wrong username
         }
     } catch (err) {
+        console.error(err);
         throw err;
     }
 }
