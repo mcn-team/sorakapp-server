@@ -21,6 +21,7 @@ async function authenticate(req, res) {
         }
 
     } catch (err) {
+        console.error(err);
         throw err;
     }
 }
