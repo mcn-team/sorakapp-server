@@ -11,8 +11,6 @@ async function createOneUser(req, res) {
             role: req.body.role
         };
 
-        //implement validation !
-
         const user = await services.createOneUser(newUser);
 
         if (user !== null) {
@@ -23,7 +21,6 @@ async function createOneUser(req, res) {
     } catch (err) {
         console.error(err);
         res.status(HTTP_BAD_REQUEST).send();
-        //throw err;
     }
 }
 
