@@ -12,6 +12,9 @@ require('./init/init-database');
 //Init standard middlewares
 require('./init/init-middlewares')(app);
 
+//Init routes
+require('./init/init-routes')(app);
+
 //Init errors middlewares
 require('./init/init-errors-middlewares')(app);
 

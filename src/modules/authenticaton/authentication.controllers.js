@@ -2,7 +2,7 @@ const services = require('./authentication.services');
 
 //status
 const HTTP_OK = 200;
-const HTTP_BAD_REQUEST = 400;
+const HTTP_UNAUTHORIZED = 401;
 
 async function authenticate(req, res) {
     try {
@@ -17,7 +17,7 @@ async function authenticate(req, res) {
         if (token !== null) {
             res.status(HTTP_OK).send(token); //authentication success
         } else {
-            res.status(HTTP_BAD_REQUEST); //authentication failed
+            res.status(HTTP_UNAUTHORIZED).send(); //authentication failed
         }
 
     } catch (err) {
