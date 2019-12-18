@@ -1,7 +1,9 @@
+const {
+    logError,
+    clientHTTPError
+} = require('../middlewares/errors');
+
 module.exports = exports = (app) => {
-    //error handling
-    app.use((err, req, res, next) => {
-        console.error(err);
-        next();
-    });
+    app.use(logError);
+    app.use(clientHTTPError);
 };

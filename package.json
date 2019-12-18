@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon server.js",
-    "lint": "./node_modules/.bin/eslint .",
+    "lint": "eslint --ext js ./src ./middlewares ./config ./init",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
