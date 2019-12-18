@@ -13,6 +13,7 @@
         "ecmaVersion": 2018
     },
     "rules": {
+      "no-useless-catch": "off",
       "prefer-template": "error",
       "quotes": ["error", "single"],
       "eqeqeq": ["error", "always", { "null": "ignore" }],

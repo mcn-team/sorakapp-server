@@ -1,4 +1,5 @@
 const express = require('express');
+require('express-async-errors');
 
 const { errorHTTPHandler } = require('./src/utils');
 const { HTTP_UNPROCESSABLE_ENTITY } = require('./src/constants/http.constants');
@@ -17,13 +18,6 @@ require('./init/init-middlewares')(app);
 
 //Init routes
 require('./init/init-routes')(app);
-
-const router = express.Router();
-router.route('/').get(() => {
-    throw errorHTTPHandler(HTTP_UNPROCESSABLE_ENTITY, 'Test throw error', '000012321');
-});
-
-app.use('/api/health-check', router);
 
 //Init errors middlewares
 require('./init/init-errors-middlewares')(app);
