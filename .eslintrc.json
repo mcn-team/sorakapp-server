@@ -13,6 +13,7 @@
         "ecmaVersion": 2018
     },
     "rules": {
+      "no-useless-catch": "off",
       "padding-line-between-statements": [
         "error",
         { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},

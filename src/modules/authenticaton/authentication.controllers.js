@@ -1,29 +1,23 @@
 const services = require('./authentication.services');
 
-//status
-const HTTP_OK = 200;
-const HTTP_UNAUTHORIZED = 401;
+const { errorHTTPHandler } = require('../../utils/error-http-handler.utils');
+
+const { HTTP_UNAUTHORIZED, HTTP_OK } = require('../../constants/http.constants');
 
 async function authenticate(req, res) {
-    try {
-        const logs = {
-            username: req.body.username,
-            password: req.body.password
-        };
+    const logs = {
+        username: req.body.username,
+        password: req.body.password
+    };
 
-        //authenticate user
-        const token = await services.authenticate(logs);
+    //authenticate user
+    const token = await services.authenticate(logs);
 
-        if (token !== null) {
-            res.status(HTTP_OK).send(token); //authentication success
-        } else {
-            res.status(HTTP_UNAUTHORIZED).send(); //authentication failed
-        }
-
-    } catch (err) {
-        console.error(err);
-        throw err;
+    if (token === null) {
+        throw errorHTTPHandler(HTTP_UNAUTHORIZED, 'login error');
     }
+
+    res.status(HTTP_OK).send(token); //authentication success
 }
 
 module.exports.authenticate = authenticate;
