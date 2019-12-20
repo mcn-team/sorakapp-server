@@ -13,6 +13,17 @@
         "ecmaVersion": 2018
     },
     "rules": {
+      "padding-line-between-statements": [
+        "error",
+        { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+        { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]},
+        { "blankLine": "always", "prev": "*", "next": "return" },
+        { "blankLine": "always", "prev": "*", "next": "cjs-export" },
+        { "blankLine": "any", "prev": "cjs-export", "next": "cjs-export" },
+        { "blankLine": "always", "prev": "cjs-import", "next": "*" },
+        { "blankLine": "any", "prev": "cjs-import", "next": "cjs-import" }
+      ],
+      "brace-style": "error",
       "prefer-template": "error",
       "quotes": ["error", "single"],
       "eqeqeq": ["error", "always", { "null": "ignore" }],
