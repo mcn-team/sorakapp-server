@@ -6,6 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/nodemon server.js",
     "lint": "eslint --ext js ./src ./middlewares ./config ./init",
+    "lint:fix": "eslint --ext js ./src ./middlewares ./config ./init --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

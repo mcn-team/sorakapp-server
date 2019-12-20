@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const User = mongoose.model('User');
 
 async function readOneUserByUsername(data) {
@@ -13,6 +14,7 @@ async function readOneUserByUsername(data) {
 async function createOneUser(data) {
     try {
         const user = new User({ username: data.username, password: data.password, role: data.role });
+
         return await user.save();
     } catch (err) {
         console.error(err);
