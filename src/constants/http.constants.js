@@ -6,6 +6,7 @@ exports.HTTP_OK = 200;
 /**
  * CLIENT ERRORS
  */
+exports.HTTP_BAD_REQUEST = 400;
 exports.HTTP_UNAUTHORIZED = 401;
 exports.HTTP_UNPROCESSABLE_ENTITY = 422;
 
