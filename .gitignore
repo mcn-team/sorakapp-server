@@ -6,4 +6,4 @@
 node_modules/
 
 # Local config
-*.local.json
+config/config.json
