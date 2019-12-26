@@ -2,7 +2,8 @@ const services = require('./authentication.services');
 
 const { errorHTTPHandler } = require('../../utils/error-http-handler.utils');
 
-const { HTTP_UNAUTHORIZED, HTTP_INTERNAL_SERVER_ERROR } = require('../../constants/http.constants');
+const { HTTP_INTERNAL_SERVER_ERROR } = require('../../constants/http.constants');
+const { WRONG_USER_PWD } = require('../../utils/errno.utils');
 
 async function authenticate(req, res) {
     const logs = {
@@ -14,7 +15,7 @@ async function authenticate(req, res) {
     const token = await services.authenticate(logs);
 
     if (!token) {
-        throw errorHTTPHandler(HTTP_UNAUTHORIZED, 'login error');
+        throw errorHTTPHandler(WRONG_USER_PWD);
     }
 
     res.send({ result: token }); //authentication success
