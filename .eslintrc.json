@@ -13,6 +13,8 @@
         "ecmaVersion": 2018
     },
     "rules": {
+      "padded-blocks": ["error", "never"],
+      "prefer-const": "error",
       "no-useless-catch": "off",
       "padding-line-between-statements": [
         "error",
