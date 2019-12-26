@@ -1,4 +1,5 @@
 const userServices = require('../users/users.services');
+const { jwtGenerate } = require('../../utils/jwtGenerator.utils');
 
 async function authenticate(logs) {
     const user = await userServices.readOneUserByUsername({ username: logs.username });
@@ -7,15 +8,13 @@ async function authenticate(logs) {
         return null;
     }
 
-    //todo: generate tokens using jwt
-    return 'fake_token6sdf5g4s65d4fgs4df4gs4dfg4d6f4gd4f65g'; //return a session token
+    return jwtGenerate(user._id);
 }
 
 async function register(data) {
-    await userServices.createOneUser({ username: data.username, password: data.password });
+    const user = await userServices.createOneUser({ username: data.username, password: data.password, role: data.role });
 
-    //todo: generate tokens using jwt
-    return 'fake_token6sdf5g4s65d4fgs4df4gs4dfg4d6f4gd4f65g'; //return a session token
+    return jwtGenerate(user._id);
 }
 
 module.exports.authenticate = authenticate;
