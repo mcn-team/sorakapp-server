@@ -14,7 +14,7 @@ async function authenticate(req, res) {
     const token = await services.authenticate(logs);
 
     if (!token) {
-        throw errorHTTPHandler(HTTP_UNAUTHORIZED, { result: 'login error' });
+        throw errorHTTPHandler(HTTP_UNAUTHORIZED, 'login error');
     }
 
     res.send({ result: token }); //authentication success
