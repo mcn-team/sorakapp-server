@@ -13,6 +13,7 @@
         "ecmaVersion": 2018
     },
     "rules": {
+      "max-len": ["error", 120],
       "padded-blocks": ["error", "never"],
       "prefer-const": "error",
       "no-useless-catch": "off",
