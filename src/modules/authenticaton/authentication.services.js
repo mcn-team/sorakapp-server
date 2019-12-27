@@ -12,7 +12,7 @@ async function authenticate(logs) {
 }
 
 async function register(data) {
-    const user = await userServices.createOneUser({ username: data.username, password: data.password, role: data.role });
+    const user = await userServices.createOneUser(data);
 
     return jwtGenerate(user._id);
 }
