@@ -13,6 +13,10 @@
         "ecmaVersion": 2018
     },
     "rules": {
+      "no-unused-vars": [
+        "error",
+        { "args": "after-used", "ignoreRestSiblings":true }
+      ],
       "max-len": ["error", 120],
       "padded-blocks": ["error", "never"],
       "prefer-const": "error",

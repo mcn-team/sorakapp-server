@@ -12,7 +12,6 @@ const MAX_SECRET_LENGTH = 128;
 const configSchema = Joi.object({
     DB_URL: Joi
         .string()
-        .uri({ scheme: [ 'mongodb' ] })
         .required(),
     DB_NAME: Joi
         .string()
@@ -29,7 +28,8 @@ const configSchema = Joi.object({
         .string()
         .min(MIN_SECRET_LENGTH)
         .max(MAX_SECRET_LENGTH)
-        .required()
+        .required(),
+    REPLICA_SET: Joi.boolean().optional()
 });
 
 Joi.assert(CONFIG, configSchema);
