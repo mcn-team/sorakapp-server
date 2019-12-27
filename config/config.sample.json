@@ -1,5 +1,6 @@
 {
   "DB_URL": "mongodb://localhost:27017",
   "DB_NAME": "sorakapp",
-  "PORT": 4000
+  "PORT": 4000,
+  "SECRET": "24hz98rt4c9h84z9trh24z9824ch984r2h98z4f5"
 }
