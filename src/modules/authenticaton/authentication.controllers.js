@@ -1,8 +1,8 @@
 const services = require('./authentication.services');
+const userServices = require('../users/users.services');
 
 const { errorHTTPHandler } = require('../../utils/error-http-handler.utils');
-
-const { HTTP_UNAUTHORIZED, HTTP_INTERNAL_SERVER_ERROR } = require('../../constants/http.constants');
+const { WRONG_USER_PWD, ALREADY_EXISTING_USER } = require('../../utils/errno.utils');
 
 async function authenticate(req, res) {
     const logs = {
@@ -14,22 +14,23 @@ async function authenticate(req, res) {
     const token = await services.authenticate(logs);
 
     if (!token) {
-        throw errorHTTPHandler(HTTP_UNAUTHORIZED, 'login error');
+        throw errorHTTPHandler(WRONG_USER_PWD);
     }
 
-    res.send({ result: token }); //authentication success
+    res.send({ token }); //authentication success
 }
 
 async function register(req, res) {
-    try {
-        const data = req.body;
+    const data = req.body;
+    const existingUser = await userServices.readOneUserByUsername({ username: data.username });
 
-        const token = await services.register(data);
-
-        res.send({ token: token }); //authentication success
-    } catch (err) {
-        throw errorHTTPHandler(HTTP_INTERNAL_SERVER_ERROR, 'register error');
+    if (existingUser) {
+        throw errorHTTPHandler(ALREADY_EXISTING_USER);
     }
+
+    const token = await services.register(data);
+
+    res.send({ token }); //authentication success
 }
 
 module.exports.authenticate = authenticate;

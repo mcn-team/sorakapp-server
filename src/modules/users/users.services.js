@@ -1,16 +1,9 @@
 const mongoose = require('mongoose');
 
-const { errorHTTPHandler } = require('../../utils/error-http-handler.utils');
-const { HTTP_NOT_FOUND } = require('../../constants/http.constants');
-
 const User = mongoose.model('User');
 
 async function readOneUserByUsername(data) {
-    try {
-        return await User.findOne({ username: data.username });
-    } catch (err) {
-        throw errorHTTPHandler(HTTP_NOT_FOUND, 'User not found');
-    }
+    return User.findOne({ username: data.username });
 }
 
 async function createOneUser(data) {
