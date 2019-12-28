@@ -1,7 +1,6 @@
 const express = require('express');
 
 require('express-async-errors');
-const database = require('./init/init-database');
 
 const { config } = require('./config');
 
