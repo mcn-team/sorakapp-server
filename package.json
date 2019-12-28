@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon server.js",
+    "start": "./node_modules/.bin/nodemon --ignore ./**/*.spec.js server.js",
     "lint": "eslint --ext js ./src ./middlewares ./config ./init",
     "lint:fix": "eslint --ext js ./src ./middlewares ./config ./init --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test mocha \"./src/**/*.spec.js\""
   },
   "repository": {
     "type": "git",
@@ -28,13 +28,22 @@
     "mongoose": "5.8.1"
   },
   "devDependencies": {
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "cross-env": "6.0.3",
     "eslint": "6.7.2",
     "husky": "3.1.0",
-    "nodemon": "2.0.2"
+    "mocha": "6.2.2",
+    "nodemon": "2.0.2",
+    "sinon-chai": "3.4.0",
+    "supertest": "4.0.2"
+  },
+  "engines" : {
+    "node" : "12.13.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-push": "npm run lint && npm run test"
     }
   }
 }
