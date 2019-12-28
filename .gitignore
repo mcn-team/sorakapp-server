@@ -7,3 +7,6 @@ node_modules/
 
 # Local config
 config/config.json
+
+# Reports
+.nyc_output/

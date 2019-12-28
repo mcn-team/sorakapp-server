@@ -7,7 +7,8 @@
     "start": "./node_modules/.bin/nodemon --ignore ./**/*.spec.js server.js",
     "lint": "eslint --ext js ./src ./middlewares ./config ./init",
     "lint:fix": "eslint --ext js ./src ./middlewares ./config ./init --fix",
-    "test": "cross-env NODE_ENV=test mocha \"./src/**/*.spec.js\""
+    "test": "cross-env NODE_ENV=test nyc mocha \"./src/**/*.spec.js\"",
+    "check": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "husky": "3.1.0",
     "mocha": "6.2.2",
     "nodemon": "2.0.2",
+    "nyc": "15.0.0",
     "sinon-chai": "3.4.0",
     "supertest": "4.0.2"
   },
@@ -43,7 +45,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint && npm run test"
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
     }
   }
 }
