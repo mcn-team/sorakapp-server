@@ -1,0 +1,7 @@
+{
+  "colors": true,
+  "recursive": true,
+  "exit": true,
+  "timeout": 60000,
+  "require": "./test/setup"
+}

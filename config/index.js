@@ -8,6 +8,7 @@ const MIN_PORT_NUMBER = 1025;
 const MAX_PORT_NUMBER = 65534;
 const MIN_SECRET_LENGTH = 16;
 const MAX_SECRET_LENGTH = 128;
+const TEST_ENV = process.env.NODE_ENV === 'test';
 
 const configSchema = Joi.object({
     DB_URL: Joi
@@ -34,4 +35,4 @@ const configSchema = Joi.object({
 
 Joi.assert(CONFIG, configSchema);
 
-exports.config = CONFIG;
+exports.config = { TEST_ENV, ...CONFIG };
