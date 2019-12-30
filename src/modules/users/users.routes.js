@@ -1,5 +1,6 @@
 const express = require('express');
 const controllers = require('./users.controllers');
+const validators = require('./users.validators');
 
 const { authenticationCheck } = require('../../../middlewares/authentication-check');
 
@@ -9,9 +10,9 @@ router.use(authenticationCheck);
 
 router.route('/')
     .get(controllers.readManyUsers)
-    .post(controllers.createOneUser);
+    .post(controllers.createOneUsers);
 
 router.route('/:id')
-    .get(controllers.readOneUser);
+    .get(validators.readOneUsers, controllers.readOneUsers);
 
 module.exports = router;

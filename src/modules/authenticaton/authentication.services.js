@@ -2,7 +2,7 @@ const userServices = require('../users/users.services');
 const { jwtGenerate } = require('../../utils/jwtGenerator.utils');
 
 async function authenticate(logs) {
-    const user = await userServices.readOneUserByUsername({ username: logs.username });
+    const user = await userServices.readOneUsersByUsername(logs.username);
 
     if (!user || user.password !== logs.password) {
         return null;
@@ -12,7 +12,7 @@ async function authenticate(logs) {
 }
 
 async function register(data) {
-    const user = await userServices.createOneUser(data);
+    const user = await userServices.createOneUsers(data);
 
     return jwtGenerate(user._id);
 }
