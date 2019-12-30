@@ -22,7 +22,7 @@ async function authenticate(req, res) {
 
 async function register(req, res) {
     const data = req.body;
-    const existingUser = await userServices.readOneUserByUsername({ username: data.username });
+    const existingUser = await userServices.readOneUserByUsername(data.username);
 
     if (existingUser) {
         throw errorHTTPHandler(ALREADY_EXISTING_USER);
