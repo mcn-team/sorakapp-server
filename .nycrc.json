@@ -1,0 +1,12 @@
+{
+  "watermarks": {
+    "lines": [60, 90],
+    "functions": [60, 90],
+    "branches": [60, 90],
+    "statements": [60, 90]
+  },
+  "exclude": [
+    "middlewares/**/*.js",
+    "init/**/*.js"
+  ]
+}

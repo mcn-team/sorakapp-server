@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { HTTP_NOT_FOUND } = require('../constants/http.constants');
+const { HTTP_NOT_FOUND } = require('../src/constants/http.constants');
 
 require('express-async-errors');
 
@@ -9,9 +9,9 @@ function createExpressTestApp(router, { user, endpoint }) {
 
     app.use(express.json());
     //Init standard middlewares
-    require('../../init/init-middlewares')(app);
+    require('../init/init-middlewares')(app);
     //Init errors middlewares
-    require('../../init/init-errors-middlewares')(app);
+    require('../init/init-errors-middlewares')(app);
 
     if (user)
         app.use((req, res, next) => {
@@ -20,7 +20,9 @@ function createExpressTestApp(router, { user, endpoint }) {
             next();
         });
 
-    app.use(endpoint || '/api', router);
+    if (router) {
+        app.use(endpoint || '/test', router);
+    }
 
     // 404 - Not found
     app.all('*', (req, res) => {

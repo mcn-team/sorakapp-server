@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const request = require('supertest');
 
-const { createExpressTestApp } = require('../../utils/tests.utils');
+const { createExpressTestApp } = require('../../../test/tests-utils');
 const { HTTP_OK } = require('../../constants/http.constants');
 const healthCheckRouter = require('./health-checks.routes');
 
@@ -14,7 +14,7 @@ describe('Health Checks integration tests', () => {
         app = createExpressTestApp(healthCheckRouter, { endpoint: ENDPOINT });
     });
 
-    describe('GET /', () => {
+    describe(`GET ${ENDPOINT}/`, () => {
         let response = null;
 
         before('API Call', async () => {
@@ -38,7 +38,7 @@ describe('Health Checks integration tests', () => {
         });
     });
 
-    describe('GET /db', () => {
+    describe(`GET ${ENDPOINT}/db`, () => {
         let response = null;
 
         before('API Call', async () => {
