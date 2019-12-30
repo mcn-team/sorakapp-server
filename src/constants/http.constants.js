@@ -2,6 +2,7 @@
  * SUCCESS
  */
 exports.HTTP_OK = 200;
+exports.HTTP_CREATED = 201;
 
 /**
  * CLIENT ERRORS
