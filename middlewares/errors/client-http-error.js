@@ -1,4 +1,4 @@
-const { HTTP_INTERNAL_SERVER_ERROR } = require('../../src/constants/http.constants');
+const { HTTP_INTERNAL_SERVER_ERROR, HTTP_BAD_REQUEST } = require('../../src/constants/http.constants');
 
 /**
  * This error middleware compiles an error object to send to client
@@ -11,11 +11,22 @@ const { HTTP_INTERNAL_SERVER_ERROR } = require('../../src/constants/http.constan
 // eslint-disable-next-line no-unused-vars
 exports.clientHTTPError = function clientHTTPError(err, req, res, next) {
     const statusCode = err.statusCode || HTTP_INTERNAL_SERVER_ERROR;
-    const payload = {
-        message: err.message,
-        statusCode,
-        ...(err.errno && { errno: err.errno })
-    };
+    let payload = null;
+
+    if (err.isJoi === true) {
+        payload = {
+            message: err.name,
+            details: err.details,
+            statusCode: HTTP_BAD_REQUEST,
+            ...(err.errno && { errno: err.errno })
+        };
+    } else {
+        payload = {
+            message: err.message,
+            statusCode,
+            ...(err.errno && { errno: err.errno })
+        };
+    }
 
     res.status(statusCode).send(payload);
 };

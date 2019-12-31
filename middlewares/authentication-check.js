@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const { errorHTTPHandler } = require('../src/utils/error-http-handler.utils');
-const { readOneUser } = require('../src/modules/users/users.services');
+const { readOneUsers } = require('../src/modules/users/users.services');
 
 const { UNAUTHORIZED_ACCESS } = require('../src/utils/errno.utils');
 const { SECRET } = require('../config/config');
@@ -15,13 +15,12 @@ exports.authenticationCheck = (req, res, next) => {
         } else {
             const userId = decoded.userId;
 
-            const user = await readOneUser(userId);
+            const user = await readOneUsers(userId);
 
             if (!user) {
                 next(errorHTTPHandler(UNAUTHORIZED_ACCESS));
             } else {
                 req.user = user;
-                console.log(user);
                 next();
             }
         }

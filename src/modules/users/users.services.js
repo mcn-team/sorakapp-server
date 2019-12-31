@@ -8,25 +8,25 @@ async function readManyUsers() {
     return User.find({}, projection).lean();
 }
 
-async function createOneUser(data) {
+async function createOneUsers(data) {
     const user = new User({ username: data.username, password: data.password, role: data.role });
     const { password, ...newUser } = (await user.save()).toJSON();
 
     return newUser;
 }
 
-async function readOneUser(userId) {
+async function readOneUsers(userId) {
     const query = { _id: mongoose.Types.ObjectId(userId) };
     const projection = { password: false };
 
     return User.findOne(query, projection).lean();
 }
 
-async function readOneUserByUsername(username) {
+async function readOneUsersByUsername(username) {
     return User.findOne({ username: username }).lean();
 }
 
 module.exports.readManyUsers = readManyUsers;
-module.exports.createOneUser = createOneUser;
-module.exports.readOneUser = readOneUser;
-module.exports.readOneUserByUsername = readOneUserByUsername;
+module.exports.createOneUsers = createOneUsers;
+module.exports.readOneUsers = readOneUsers;
+module.exports.readOneUsersByUsername = readOneUsersByUsername;
