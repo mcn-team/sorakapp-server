@@ -10,7 +10,7 @@ router.use(authenticationCheck);
 
 router.route('/')
     .get(controllers.readManyUsers)
-    .post(controllers.createOneUsers);
+    .post(validators.createOneUsers, controllers.createOneUsers);
 
 router.route('/:id')
     .get(validators.readOneUsers, controllers.readOneUsers);
