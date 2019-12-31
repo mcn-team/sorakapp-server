@@ -3,16 +3,10 @@ const Joi = require('@hapi/joi');
 const { validatorsMiddleware } = require('../../../middlewares/validatorsMiddleware');
 const userRoles = require('../../constants/roles.constants');
 
-const ID_LENGTH = 24;
 const USERNAME_MIN = 6;
 const USERNAME_MAX = 12;
 const PASSWORD_MIN = 8;
 const PASSWORD_MAX = 12;
-
-const idSchema = Joi
-    .string()
-    .hex()
-    .length(ID_LENGTH);
 
 const usernameSchema = Joi
     .string()
@@ -29,7 +23,19 @@ const rolesSchema = Joi
     .string()
     .valid(...userRoles.getValues);
 
-const createOneUsers = validatorsMiddleware(() => {
+const authenticate = validatorsMiddleware(() => {
+    return {
+        body: Joi
+            .object()
+            .keys({
+                username: usernameSchema.required(),
+                password: passwordSchema.required()
+            })
+            .required()
+    };
+});
+
+const register = validatorsMiddleware(() => {
     return {
         body: Joi
             .object()
@@ -42,16 +48,5 @@ const createOneUsers = validatorsMiddleware(() => {
     };
 });
 
-const readOneUsers = validatorsMiddleware(() => {
-    return {
-        params: Joi
-            .object()
-            .keys({
-                id: idSchema.required()
-            })
-            .required()
-    };
-});
-
-module.exports.readOneUsers = readOneUsers;
-module.exports.createOneUsers = createOneUsers;
+module.exports.authenticate = authenticate;
+module.exports.register = register;
